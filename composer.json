@@ -2,7 +2,14 @@
     "name": "markdock/imalette",
     "type": "library",
     "description": "Trouve la couleur d'une image sur une palette prédéfinie",
-    "require": {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/markdock/imalette"
+        }
+    ],
+	"require": {
+		"php": "^8.1"
 	},
 	"license": "MIT",
 	"minimum-stability": "dev",
