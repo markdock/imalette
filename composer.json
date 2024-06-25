@@ -3,11 +3,11 @@
     "type": "library",
     "description": "Trouve la couleur d'une image sur une palette prédéfinie",
     "require": {
-        "php": "^8.2",
+        "php": "^8.2"
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
+            "App\\": "app/"
         }
-    },
+    }
 }
