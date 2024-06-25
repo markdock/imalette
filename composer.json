@@ -2,9 +2,7 @@
     "name": "markdock/imalette",
     "type": "library",
     "description": "Trouve la couleur d'une image sur une palette prédéfinie",
-    "require": {
-        "php": "^8.2"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "Src\\": "src/"

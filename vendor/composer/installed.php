@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'markdock/imalette',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '41c03770148f572616e13f4800ccec382611e5b1',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '413e8283274fddc6675399354c1e3bfbc6ca6ebc',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'markdock/imalette' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '41c03770148f572616e13f4800ccec382611e5b1',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '413e8283274fddc6675399354c1e3bfbc6ca6ebc',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
