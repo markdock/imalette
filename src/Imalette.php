@@ -12,7 +12,8 @@ class Imalette
     // setup: palette
     public function getColor($image)
     {
-        $img = imagecreatefrompng($image);
+        $colors = gd_info();
+        /*$img = imagecreatefrompng($image);
 
         $width = imagesx($img);
         $height = imagesy($img);
@@ -31,7 +32,7 @@ class Imalette
                 $y_array[] = $x_array;
             } 
             $colors[] = $y_array;
-        }
+        }*/
         // convert image to RGB
         // use formula to produce dominant color
         // find shortest distance between dominant color and palette color
