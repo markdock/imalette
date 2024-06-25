@@ -3,7 +3,7 @@
         'name' => 'markdock/imalette',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd480feed1dda08f5989c0d8fab2761ebbb3ff79a',
+        'reference' => '2e56cc1de491cca72a8e75ee44ff8cbb89616787',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'markdock/imalette' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd480feed1dda08f5989c0d8fab2761ebbb3ff79a',
+            'reference' => '2e56cc1de491cca72a8e75ee44ff8cbb89616787',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
