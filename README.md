@@ -71,7 +71,7 @@ Ensuite, à partir d'une palette de couleurs fournie, il calcule la distance euc
     ```php
     // Palette
     $palette = $palette->getPalette(); // array avec toutes les couleurs en HEX
-    $palette = $palette->getColor(3); // récupère une couleur id = [ 0 - (n-1) ]
+    $palette = $palette->getColor(3); // récupère une couleur. paramètre id = [ 0 - (n-1) ]
 
     // Imalette
     $colors = $imalette->getColors($image); // array contenant l'ensemble des pixels de l'image en RGB
