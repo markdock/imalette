@@ -65,9 +65,9 @@ Ensuite, à partir d'une palette de couleurs fournie, il calcule la distance euc
     $palcol = $imalette->findColor($palette, $image[, $ignore_color]); // Donne la couleur en HEX (exemple: #808000)
 	// $ignore_color est optionnel, sa valeur par défaut est array(250, 250, 250, '>=')
 	// Ce paramètre permet d'ignorer la couleur de fond. Les trois premières valeurs sont des valeurs RGB.
-	// La 4e valeur correspond à l'attitude à adopter vis-à-vis de cette couleur (ignorer seulement celle-ci ? tout ce qui est supérieur ? etc.).
+	// La 4e valeur correspond à l'attitude à adopter vis-à-vis de cette couleur (ignorer seulement celle-ci ? tout ce qui est supérieur ? etc.): '>', '<', '>=', '<=', '==', '!='.
 	// Notons que les pixels invisibles ou trop transparents sont déjà ignorés.
-	// $ignore_color peut aussi être égal à -1. Dans ce cas, la couleur du premier pixel de l'image sera utilisée pour détecter la couleur de fond et ignorer tous les pixels de la même valeur.
+	// $ignore_color peut aussi être égal à -1. Dans ce cas, la couleur du premier pixel de l'image est utilisée pour détecter la couleur de fond et ignorer tous les pixels de la même couleur.
     ?>
     ```
 
