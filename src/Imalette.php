@@ -8,9 +8,9 @@ function ImaletteError($message) {
 
 class Imalette
 {
-    public function findColor(Palette $palette, $image) {
+    public function findColor(Palette $palette, $image, $ignore_color = array(250, 250, 250, '>=')) {
         // get colors of image
-        $colors = $this->getColors($image);
+        $colors = $this->getColors($image, $ignore_color);
 
         // find dominant color out of 20 centric points
         $dominant = $this->findDominant($colors, 20);
@@ -21,7 +21,7 @@ class Imalette
         //return $this->rgb2hex($dominant);
         return $palcol;
     }
-    public function getColors($path) {
+    public function getColors($path, $ignore_color = array(250, 250, 250, '>=')) {
         // load image
         $pathInfo = pathinfo($path);
         $extension = isset($pathInfo['extension']) ? $pathInfo['extension'] : null;
@@ -31,23 +31,29 @@ class Imalette
         }
         switch ($extension) {
             case 'jpg':
+            case 'JPG':
             case 'jpeg':
+            case 'JPEG':
                 $image = imagecreatefromjpeg($path);
                 break;
 
             case 'png':
+            case 'PNG':
                 $image = imagecreatefrompng($path);
                 break;
     
             case 'gif':
+            case 'GIF':
                 $image = imagecreatefromgif($path);
                 break;
     
             case 'bmp':
+            case 'BMP':
                 $image = imagecreatefrombmp($path);
                 break;
     
             case 'webp':
+            case 'WEBP':
                 $image = imagecreatefromwebp($path);
                 break;
     
@@ -75,7 +81,36 @@ class Imalette
                 $r = ($rgb >> 16) & 0xFF;
                 $g = ($rgb >> 8) & 0xFF;
                 $b = $rgb & 0xFF;
-                if($r >= 250 && $g >= 250 && $b >= 250) continue;
+                $skip = false;
+                switch ($ignore_color[3]) {
+                    case '<':
+                        if($r < $ignore_color[0] && $g < $ignore_color[1] && $b < $ignore_color[2]) $skip = true;
+                        break;
+        
+                    case '>':
+                        if($r > $ignore_color[0] && $g > $ignore_color[1] && $b > $ignore_color[2]) $skip = true;
+                        break;
+            
+                    case '<=':
+                        if($r <= $ignore_color[0] && $g <= $ignore_color[1] && $b <= $ignore_color[2]) $skip = true;
+                        break;
+            
+                    case '>=':
+                        if($r >= $ignore_color[0] && $g >= $ignore_color[1] && $b >= $ignore_color[2]) $skip = true;
+                        break;
+            
+                    case '==':
+                        if($r == $ignore_color[0] && $g == $ignore_color[1] && $b == $ignore_color[2]) $skip = true;
+                        break;
+
+                    case '!=':
+                        if($r != $ignore_color[0] || $g != $ignore_color[1] || $b != $ignore_color[2]) $skip = true;
+                        break;
+            
+                    default:
+                        break;
+                }
+                if($skip) continue;
                 array_push($colors, array($r, $g, $b));
             }
         }

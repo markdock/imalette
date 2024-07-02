@@ -35,7 +35,7 @@ Ensuite, à partir d'une palette de couleurs fournie, il calcule la distance euc
     use Imalette\Palette;
 
     // Image
-    $image = "images/image.png";
+    $image = "images/image.png"; // jpg/jpeg, png, gif, bmp, webp
 
     // Palette
     $palette = new Palette();
@@ -62,7 +62,11 @@ Ensuite, à partir d'une palette de couleurs fournie, il calcule la distance euc
 
     // Imalette
     $imalette = new Imalette();
-    $palcol = $imalette->findColor($palette, $image); // La couleur en HEX (exemple: #808000)
+    $palcol = $imalette->findColor($palette, $image[, $ignore_color]); // Donne la couleur en HEX (exemple: #808000)
+	// $ignore_color est optionnel, sa valeur par défaut est array(250, 250, 250, '>=')
+	// Ce paramètre permet d'ignorer la couleur de fond. Les trois premières valeurs sont des valeurs RGB.
+	// La 4e valeur correspond à l'attitude à adopter vis-à-vis de cette couleur (ignorer seulement celle-ci ? tout ce qui est supérieur ? etc.).
+	// Notons que les pixels invisibles ou trop transparents sont déjà ignorés.
     ?>
     ```
 
@@ -74,7 +78,7 @@ Ensuite, à partir d'une palette de couleurs fournie, il calcule la distance euc
     $palette = $palette->getColor(3); // récupère une couleur. paramètre id = [ 0 - (n-1) ]
 
     // Imalette
-    $colors = $imalette->getColors($image); // array contenant l'ensemble des pixels de l'image en RGB
+    $colors = $imalette->getColors($image[, $ignore_color]); // array contenant l'ensemble des pixels de l'image en RGB
     $distance = $imalette->getDistance($p1, $p2); // calcule la distance Euclidenne entre deux points
     $hex = $imalette->rgb2hex($rgb); // conversion rgb -> hex
     $rgb = $imalette->hex2rgb($rgb); // conversion hex -> rgb
