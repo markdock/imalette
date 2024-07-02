@@ -19,7 +19,7 @@ class Palette {
         array_push($this->palette, sprintf("#%02x%02x%02x", $r, $g, $b));
     }
     public function addColorRGBarray($rgb) {
-        if (!is_array($rgb) && count($rgb) >= 3) {
+        if (!is_array($rgb) || count($rgb) < 3) {
             PaletteError("Did not pass an array with at least 3 elements to addColorRGBarray");
             return false;
         }

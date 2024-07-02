@@ -71,46 +71,64 @@ class Imalette
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // fetch all colors, but exclude transparent (keep semi-transparent) and pure white
+        // fetch all colors, but exclude invisible, too transparent and ignore_color
         $colors = array();
+        $first_pixel = null;
         for ($x = 0; $x < $width; $x++) {
             for ($y = 0; $y < $height; $y++) {
                 $rgb = imagecolorat($image, $x, $y);
                 $a = ($rgb >> 24) & 0x7F;
                 if($a > 63) continue;
+                if($x == 0 && $y == 0) $first_pixel = $rgb;
                 $r = ($rgb >> 16) & 0xFF;
                 $g = ($rgb >> 8) & 0xFF;
                 $b = $rgb & 0xFF;
-                $skip = false;
-                switch ($ignore_color[3]) {
-                    case '<':
-                        if($r < $ignore_color[0] && $g < $ignore_color[1] && $b < $ignore_color[2]) $skip = true;
-                        break;
-        
-                    case '>':
-                        if($r > $ignore_color[0] && $g > $ignore_color[1] && $b > $ignore_color[2]) $skip = true;
-                        break;
-            
-                    case '<=':
-                        if($r <= $ignore_color[0] && $g <= $ignore_color[1] && $b <= $ignore_color[2]) $skip = true;
-                        break;
-            
-                    case '>=':
-                        if($r >= $ignore_color[0] && $g >= $ignore_color[1] && $b >= $ignore_color[2]) $skip = true;
-                        break;
-            
-                    case '==':
-                        if($r == $ignore_color[0] && $g == $ignore_color[1] && $b == $ignore_color[2]) $skip = true;
-                        break;
 
-                    case '!=':
-                        if($r != $ignore_color[0] || $g != $ignore_color[1] || $b != $ignore_color[2]) $skip = true;
-                        break;
+                $skip = false;
+                if($ignore_color == -1) {
+                    if($first_pixel != null) {
+                        $r2 = ($first_pixel >> 16) & 0xFF;
+                        $g2 = ($first_pixel >> 8) & 0xFF;
+                        $b2 = $first_pixel & 0xFF;
+                        if($r == $r2 && $g == $g2 && $b == $b2) $skip = true;
+                    }
+                } else {
+                    if(!is_array($ignore_color) || count($ignore_color) < 4) {
+                        ImaletteError("Did not pass an array 'ignore_color' with at least 4 elements to findColor or getColors");
+                        return false;
+                    }
+
+                    switch ($ignore_color[3]) {
+                        case '<':
+                            if($r < $ignore_color[0] && $g < $ignore_color[1] && $b < $ignore_color[2]) $skip = true;
+                            break;
             
-                    default:
-                        break;
+                        case '>':
+                            if($r > $ignore_color[0] && $g > $ignore_color[1] && $b > $ignore_color[2]) $skip = true;
+                            break;
+                
+                        case '<=':
+                            if($r <= $ignore_color[0] && $g <= $ignore_color[1] && $b <= $ignore_color[2]) $skip = true;
+                            break;
+                
+                        case '>=':
+                            if($r >= $ignore_color[0] && $g >= $ignore_color[1] && $b >= $ignore_color[2]) $skip = true;
+                            break;
+                
+                        case '==':
+                            if($r == $ignore_color[0] && $g == $ignore_color[1] && $b == $ignore_color[2]) $skip = true;
+                            break;
+    
+                        case '!=':
+                            if($r != $ignore_color[0] || $g != $ignore_color[1] || $b != $ignore_color[2]) $skip = true;
+                            break;
+                
+                        default:
+                            break;
+                    }
                 }
                 if($skip) continue;
+
                 array_push($colors, array($r, $g, $b));
             }
         }
